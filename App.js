@@ -64,7 +64,7 @@ const App: () => Node = () => {
   return (
     <View>
       <TextInput
-        placeholder="Mimomamemo"
+        placeholder="Mimomamemomamemo"
         label="Email"
         mode="outlined"
       />
