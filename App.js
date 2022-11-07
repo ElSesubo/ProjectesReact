@@ -62,16 +62,27 @@ const App: () => Node = () => {
   };
 
   return (
-    <View>
-      <TextInput
-        placeholder="Mimomamemomamemo"
-        label="Email"
-        mode="outlined"
+    <SafeAreaView style={backgroundStyle}>
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={backgroundStyle.backgroundColor}
       />
-    <Button icon="home" mode="contained" onPress={() => alert('Pressed')}>
-      Home
-    </Button>
-    </View>
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={backgroundStyle}>
+        <Header/>
+      </ScrollView>
+      <View>
+        <TextInput
+          placeholder="Mimomamemomamemo"
+          label="Email"
+          mode="outlined"
+        />
+        <Button icon="home" mode="contained" onPress={() => alert('Pressed')}>
+          Home
+        </Button>
+      </View>
+    </SafeAreaView>
   );
 };
 
