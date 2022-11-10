@@ -5,7 +5,7 @@
  * @format
  * @flow strict-local
  */
- import { Button, TextInput, ProgressBar, MD3Colors } from 'react-native-paper';
+ import { Button, TextInput, ProgressBar, MD3Colors, Switch, Surface, Chip } from 'react-native-paper';
 import React from 'react';
 import type {Node} from 'react';
 import {
@@ -54,6 +54,17 @@ const Section = ({children, title}): Node => {
   );
 };
 
+const MySwitch = () => {
+  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+
+  const onToggleSwitch = () => {
+    setIsSwitchOn(!isSwitchOn);
+  }
+  return <Switch color='red' value={isSwitchOn} onValueChange={onToggleSwitch} />;
+};
+
+const [colorCh, setColorChip] = useState();
+
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -70,23 +81,54 @@ const App: () => Node = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header/>
-      </ScrollView>
-      <View>
+        <View>
+        <Text>{"\n"}TextInput (email)</Text>
         <TextInput
           placeholder="Mimomamemomamemo"
           label="Email"
           mode="outlined"
         />
-        <Button icon="home" mode="contained" onPress={() => alert('Pressed')}>
-          Home
+        <Text>{"\n"}Button (amb text i icona)</Text>
+        <Button style={styles.buttonSt} icon="alien" mode="contained" onPress={() => alert('Pressed')}>
+          ALIEN
         </Button>
+        <Button style={styles.buttonSt} icon="alien" mode="outlined" onPress={() => alert('Pressed')}>
+          ALIEN
+        </Button>
+        <Button style={styles.buttonSt} icon="alien" mode="elevated" onPress={() => alert('Pressed')}>
+          ALIEN
+        </Button>
+        <Button style={styles.buttonSt} icon="alien" mode="contained-tonal" onPress={() => alert('Pressed')}>
+          ALIEN
+        </Button>
+        <Text>{"\n"}Swith necessites un descans?</Text>
+        <MySwitch></MySwitch>
+        <Text>{"\n"}Botó dins d'un component surface</Text>
+        <Surface style={styles.surface} elevation={4}>
+          <Button style={styles.buttonSt} icon="alien" mode="contained" onPress={() => alert('Pressed')}>
+            ALIEN
+          </Button>
+        </Surface>
+        <Text>{"\n"}Provant Chips</Text>
+        <View style={styles.row}>
+          <Chip icon="wifi" onPress={() => setColorChip('red')}>Wifi</Chip>
+          <Chip icon="web" onPress={() => console.log('Pressed')}>Internet</Chip>
+        </View>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  buttonSt:{
+    borderRadius: 5,
+    color: "red",
+  },
+  row:{
+    flexDirection:"row", 
+    flexWrap:"wrap",
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
