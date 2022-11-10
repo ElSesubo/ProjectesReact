@@ -5,8 +5,9 @@
  * @format
  * @flow strict-local
  */
- import { Button, TextInput, ProgressBar, MD3Colors, Switch, Surface, Chip } from 'react-native-paper';
+import { Button, TextInput, ProgressBar, MD3Colors, Switch, Surface, Chip } from 'react-native-paper';
 import React from 'react';
+import { useState, useEffect } from 'react';
 import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -63,13 +64,32 @@ const MySwitch = () => {
   return <Switch color='red' value={isSwitchOn} onValueChange={onToggleSwitch} />;
 };
 
-const [colorCh, setColorChip] = useState();
-
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+
+  const [selected, setSelected] = useState(false);
+  const [textColor, setTextColor] = useState(`red`);
+  const [style2, setStyle] = useState({
+    borderColor: `red`,
+    backgroundColor: `grey`,
+  });
+
+  useEffect(() => {
+    if (selected) {
+      setTextColor(`red`);
+      setStyle({ borderColor: `grey`, backgroundColor: `transparent` });
+    } else {
+      setTextColor(`grey`);
+      setStyle({ borderColor: `grey`, backgroundColor: `transparent` });
+    }
+  }, [selected]);
+
+  const handlePress = () => {
+    setSelected(!selected);
   };
 
   return (
@@ -111,7 +131,7 @@ const App: () => Node = () => {
         </Surface>
         <Text>{"\n"}Provant Chips</Text>
         <View style={styles.row}>
-          <Chip icon="wifi" onPress={() => setColorChip('red')}>Wifi</Chip>
+        <Chip style={styles.style2} icon="wifi" selected={selected} selectedColor={textColor} onPress={handlePress}>Wifi</Chip>
           <Chip icon="web" onPress={() => console.log('Pressed')}>Internet</Chip>
         </View>
       </View>
