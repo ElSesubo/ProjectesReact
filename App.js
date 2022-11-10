@@ -72,19 +72,13 @@ const App: () => Node = () => {
   };
 
   const [selected, setSelected] = useState(false);
-  const [textColor, setTextColor] = useState(`red`);
-  const [style2, setStyle] = useState({
-    borderColor: `red`,
-    backgroundColor: `grey`,
-  });
+  const [textColor, setTextColor] = useState('red');
 
   useEffect(() => {
     if (selected) {
-      setTextColor(`red`);
-      setStyle({ borderColor: `grey`, backgroundColor: `transparent` });
+      setTextColor('red');
     } else {
-      setTextColor(`grey`);
-      setStyle({ borderColor: `grey`, backgroundColor: `transparent` });
+      setTextColor('black');
     }
   }, [selected]);
 
